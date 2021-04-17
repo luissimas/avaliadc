@@ -13,4 +13,9 @@ routes.get('/professores/create', professoresController.create)
 routes.delete('/professores/delete', professoresController.delete)
 routes.post('/professores/update', professoresController.update)
 
+routes.get('/avaliacoes/list', avaliacoesController.list)
+routes.get('/avaliacoes/create', avaliacoesController.create)
+routes.delete('/avaliacoes/delete', avaliacoesController.delete)
+routes.post('/avaliacoes/update', avaliacoesController.update)
+
 module.exports = routes
