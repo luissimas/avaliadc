@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('avaliacoes', function (table) {
     // Chave primária que se autoincrementa
-    table.increments();
+    table.increments('id');
 
     table.string('curso').notNullable();
     table.integer('ano_ingresso').notNullable();

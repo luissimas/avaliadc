@@ -8,14 +8,15 @@ const avaliacoesController = require('./controllers/avaliacoesController')
 
 const routes = express.Router();
 
-routes.get('/professores/list', professoresController.list)
-routes.get('/professores/create', professoresController.create)
-routes.delete('/professores/delete', professoresController.delete)
-routes.post('/professores/update', professoresController.update)
+routes.get('/professores', professoresController.list)
+routes.get('/professores/:id', professoresController.listById)
+routes.post('/professores', professoresController.create)
+routes.put('/professores', professoresController.update)
+routes.delete('/professores', professoresController.delete)
 
-routes.get('/avaliacoes/list', avaliacoesController.list)
-routes.get('/avaliacoes/create', avaliacoesController.create)
-routes.delete('/avaliacoes/delete', avaliacoesController.delete)
-routes.post('/avaliacoes/update', avaliacoesController.update)
+routes.get('/avaliacoes', avaliacoesController.list)
+routes.post('/avaliacoes', avaliacoesController.create)
+routes.put('/avaliacoes', avaliacoesController.update)
+routes.delete('/avaliacoes', avaliacoesController.delete)
 
 module.exports = routes
