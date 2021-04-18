@@ -14,7 +14,7 @@ routes.post('/professores', professoresController.create)
 routes.put('/professores', professoresController.update)
 routes.delete('/professores', professoresController.delete)
 
-routes.get('/avaliacoes', avaliacoesController.list)
+routes.get('/avaliacoes/:professor_id', avaliacoesController.list)
 routes.post('/avaliacoes', avaliacoesController.create)
 routes.put('/avaliacoes', avaliacoesController.update)
 routes.delete('/avaliacoes', avaliacoesController.delete)

@@ -3,7 +3,7 @@ const connection = require('../database/connection');
 module.exports = {
   async list(request, response, next) {
     try {
-      const { professor_id } = request.body;
+      const { professor_id } = request.params;
 
       const count = await connection('avaliacoes')
         .where('professor_id', professor_id)
