@@ -18,7 +18,7 @@ exports.seed = function (knex) {
           avaliacao_correcao: 2,
           avaliacao_materiais: 4,
           avaliacao_cuidado_ofensivo: 2,
-          avaliacao_cobra_presenca: 4,
+          cobra_presenca: true,
           professor_id: 3,
         },
         {
@@ -34,7 +34,7 @@ exports.seed = function (knex) {
           avaliacao_correcao: 2,
           avaliacao_materiais: 4,
           avaliacao_cuidado_ofensivo: 2,
-          avaliacao_cobra_presenca: 4,
+          cobra_presenca: true,
           professor_id: 1,
         },
         {
@@ -50,7 +50,7 @@ exports.seed = function (knex) {
           avaliacao_correcao: 2,
           avaliacao_materiais: 4,
           avaliacao_cuidado_ofensivo: 2,
-          avaliacao_cobra_presenca: 4,
+          cobra_presenca: false,
           professor_id: 3,
         },
         {
@@ -66,7 +66,7 @@ exports.seed = function (knex) {
           avaliacao_correcao: 2,
           avaliacao_materiais: 4,
           avaliacao_cuidado_ofensivo: 2,
-          avaliacao_cobra_presenca: 4,
+          cobra_presenca: false,
           professor_id: 2,
         },
         {
@@ -82,7 +82,7 @@ exports.seed = function (knex) {
           avaliacao_correcao: 2,
           avaliacao_materiais: 4,
           avaliacao_cuidado_ofensivo: 2,
-          avaliacao_cobra_presenca: 4,
+          cobra_presenca: false,
           professor_id: 2,
         },
         {
@@ -98,7 +98,7 @@ exports.seed = function (knex) {
           avaliacao_correcao: 2,
           avaliacao_materiais: 4,
           avaliacao_cuidado_ofensivo: 2,
-          avaliacao_cobra_presenca: 4,
+          cobra_presenca: true,
           professor_id: 1,
         },
       ]);

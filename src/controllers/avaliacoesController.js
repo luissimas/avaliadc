@@ -38,7 +38,7 @@ module.exports = {
         avaliacao_correcao,
         avaliacao_materiais,
         avaliacao_cuidado_ofensivo,
-        avaliacao_cobra_presenca,
+        cobra_presenca,
         professor_id,
       } = request.body;
 
@@ -65,7 +65,7 @@ module.exports = {
         avaliacao_correcao,
         avaliacao_materiais,
         avaliacao_cuidado_ofensivo,
-        avaliacao_cobra_presenca,
+        cobra_presenca,
         professor_id,
       });
 
@@ -91,7 +91,7 @@ module.exports = {
         avaliacao_correcao,
         avaliacao_materiais,
         avaliacao_cuidado_ofensivo,
-        avaliacao_cobra_presenca,
+        cobra_presenca,
       } = request.body;
 
       const rows = await connection('avaliacoes').where('id', id).update({
@@ -107,7 +107,7 @@ module.exports = {
         avaliacao_correcao: avaliacao_correcao,
         avaliacao_materiais: avaliacao_materiais,
         avaliacao_cuidado_ofensivo: avaliacao_cuidado_ofensivo,
-        avaliacao_cobra_presenca: avaliacao_cobra_presenca,
+        cobra_presenca: cobra_presenca,
       });
 
       if (rows === 0) {

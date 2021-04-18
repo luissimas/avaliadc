@@ -21,7 +21,7 @@ module.exports = {
       avaliacao_correcao: Joi.number().integer().positive().max(5),
       avaliacao_materiais: Joi.number().integer().positive().max(5),
       avaliacao_cuidado_ofensivo: Joi.number().integer().positive().max(5),
-      avaliacao_cobra_presenca: Joi.number().integer().positive().max(5),
+      cobra_presenca: Joi.boolean().required(),
       professor_id: Joi.number().integer().positive().required(),
     }),
   }),
@@ -43,7 +43,7 @@ module.exports = {
       avaliacao_correcao: Joi.number().integer().positive().max(5),
       avaliacao_materiais: Joi.number().integer().positive().max(5),
       avaliacao_cuidado_ofensivo: Joi.number().integer().positive().max(5),
-      avaliacao_cobra_presenca: Joi.number().integer().positive().max(5),
+      cobra_presenca: Joi.boolean().required(),
     }),
   }),
 

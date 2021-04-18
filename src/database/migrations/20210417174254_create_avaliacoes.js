@@ -17,7 +17,7 @@ exports.up = function (knex) {
     table.integer('avaliacao_correcao').notNullable();
     table.integer('avaliacao_materiais').notNullable();
     table.integer('avaliacao_cuidado_ofensivo').notNullable();
-    table.boolean('avaliacao_cobra_presenca').notNullable();
+    table.boolean('cobra_presenca').notNullable();
 
     // Chave estrangeira id do professor sendo avaliado
     table.integer('professor_id').notNullable();
