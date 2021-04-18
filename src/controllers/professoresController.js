@@ -45,7 +45,7 @@ module.exports = {
         qualificacao,
       });
 
-      return response.json({ message: 'professor cadastrado com sucesso' });
+      return response.status(200);
     } catch (error) {
       next(error);
     }
@@ -62,12 +62,10 @@ module.exports = {
       });
 
       if (rows === 0) {
-        return response
-          .status(400)
-          .json({ error: 'Nenhum professor com esse id.' });
+        return response.status(204).send();
       }
 
-      return response.status(204).send();
+      return response.status(200).send();
     } catch (error) {
       next(error);
     }
@@ -81,12 +79,10 @@ module.exports = {
       const rows = await connection('professores').where('id', id).delete();
 
       if (rows === 0) {
-        return response
-          .status(400)
-          .json({ error: 'Nenhum professor com esse id.' });
+        return response.status(204).send();
       }
 
-      return response.status(204).send();
+      return response.status(200).send();
     } catch (error) {
       next(error);
     }

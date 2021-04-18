@@ -49,9 +49,7 @@ module.exports = {
         .first();
 
       if (!professor) {
-        return response
-          .status(400)
-          .json({ erro: 'Nenhum professor com o id passado' });
+        return response.status(204).send();
       }
 
       await connection('avaliacoes').insert({
@@ -71,7 +69,7 @@ module.exports = {
         professor_id,
       });
 
-      return response.json({ message: 'avaliacao cadastrada com sucesso' });
+      return response.status(200).send();
     } catch (error) {
       next(error);
     }
@@ -113,12 +111,10 @@ module.exports = {
       });
 
       if (rows === 0) {
-        return response
-          .status(400)
-          .json({ error: 'Nenhuma avaliacao com esse id.' });
+        return response.status(204).send();
       }
 
-      return response.status(204).send();
+      return response.status(200).send();
     } catch (error) {
       next(error);
     }
@@ -132,12 +128,10 @@ module.exports = {
       const rows = await connection('avaliacoes').where('id', id).delete();
 
       if (rows === 0) {
-        return response
-          .status(400)
-          .json({ error: 'Nenhuma avaliacao com esse id.' });
+        return response.status(204).send();
       }
 
-      return response.status(204).send();
+      return response.status(200).send();
     } catch (error) {
       next(error);
     }
