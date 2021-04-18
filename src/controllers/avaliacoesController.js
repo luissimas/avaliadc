@@ -79,8 +79,8 @@ module.exports = {
 
   async update(request, response, next) {
     try {
+      const { id } = request.params;
       const {
-        id,
         curso,
         ano_ingresso,
         comentario,
@@ -94,7 +94,6 @@ module.exports = {
         avaliacao_materiais,
         avaliacao_cuidado_ofensivo,
         avaliacao_cobra_presenca,
-        professor_id,
       } = request.body;
 
       const rows = await connection('avaliacoes').where('id', id).update({
@@ -111,7 +110,6 @@ module.exports = {
         avaliacao_materiais: avaliacao_materiais,
         avaliacao_cuidado_ofensivo: avaliacao_cuidado_ofensivo,
         avaliacao_cobra_presenca: avaliacao_cobra_presenca,
-        professor_id: professor_id,
       });
 
       if (rows === 0) {
@@ -128,7 +126,7 @@ module.exports = {
 
   async delete(request, response, next) {
     try {
-      const { id } = request.body;
+      const { id } = request.params;
 
       // O método delete retorna o número de linhas afetadas, podemos usar isso para verificar se a operação foi bem sucedida
       const rows = await connection('avaliacoes').where('id', id).delete();

@@ -3,7 +3,7 @@ const { celebrate, Joi, Segments } = require('celebrate');
 module.exports = {
   listById: celebrate({
     [Segments.PARAMS]: Joi.object().keys({
-      id: Joi.number().integer().required().positive(),
+      id: Joi.number().integer().positive().required(),
     }),
   }),
 
@@ -16,7 +16,7 @@ module.exports = {
 
   update: celebrate({
     [Segments.PARAMS]: Joi.object().keys({
-      id: Joi.number().integer().required().positive(),
+      id: Joi.number().integer().positive().required(),
     }),
     [Segments.BODY]: Joi.object().keys({
       nome: Joi.string().min(4).required(),
@@ -26,7 +26,7 @@ module.exports = {
 
   delete: celebrate({
     [Segments.PARAMS]: Joi.object().keys({
-      id: Joi.number().integer().required().positive(),
+      id: Joi.number().integer().positive().required(),
     }),
   }),
 };

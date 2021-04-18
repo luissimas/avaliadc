@@ -5,7 +5,6 @@ const professoresController = require('./controllers/professoresController');
 const avaliacoesController = require('./controllers/avaliacoesController');
 
 // Validação
-const { celebrate, Joi, Segments } = require('celebrate');
 const professoresValidator = require('./validation/professoresValidator');
 const avaliacoesValidator = require('./validation/avaliacoesValidator');
 
@@ -38,9 +37,29 @@ routes.delete(
   professoresController.delete
 );
 
-routes.get('/avaliacoes/:professor_id', avaliacoesController.list);
-routes.post('/avaliacoes', avaliacoesController.create);
-routes.put('/avaliacoes', avaliacoesController.update);
-routes.delete('/avaliacoes', avaliacoesController.delete);
+// Avaliações
+routes.get(
+  '/avaliacoes/:professor_id',
+  avaliacoesValidator.list,
+  avaliacoesController.list
+);
+
+routes.post(
+  '/avaliacoes',
+  avaliacoesValidator.create,
+  avaliacoesController.create
+);
+
+routes.put(
+  '/avaliacoes/:id',
+  avaliacoesValidator.update,
+  avaliacoesController.update
+);
+
+routes.delete(
+  '/avaliacoes/:id',
+  avaliacoesValidator.delete,
+  avaliacoesController.delete
+);
 
 module.exports = routes;
