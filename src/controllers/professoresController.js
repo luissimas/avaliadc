@@ -53,7 +53,8 @@ module.exports = {
 
   async update(request, response, next) {
     try {
-      const { id, nome, qualificacao } = request.body;
+      const { id } = request.params;
+      const { nome, qualificacao } = request.body;
 
       const rows = await connection('professores').where('id', id).update({
         nome: nome,
@@ -74,7 +75,7 @@ module.exports = {
 
   async delete(request, response, next) {
     try {
-      const { id } = request.body;
+      const { id } = request.params;
 
       // O método delete retorna o número de linhas afetadas, podemos usar isso para verificar se a operação foi bem sucedida
       const rows = await connection('professores').where('id', id).delete();
