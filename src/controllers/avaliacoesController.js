@@ -51,7 +51,7 @@ module.exports = {
       if (!professor) {
         return response
           .status(400)
-          .json({ erro: 'Nengum professor com o id passado' });
+          .json({ erro: 'Nenhum professor com o id passado' });
       }
 
       await connection('avaliacoes').insert({
