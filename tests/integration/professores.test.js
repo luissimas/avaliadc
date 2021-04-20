@@ -1,14 +1,7 @@
-const { randomString } = require('../../src/utils/generateRandom');
+const { randomString } = require('../utils/generateRandom');
+const { request } = require('../utils/request')
 const knex = require('../../src/database/connection');
 const professoresService = require('../../src/services/professoresService');
-
-const axios = require('axios').create({
-  baseURL: 'http://localhost:3333',
-});
-
-const request = function (url, method, data) {
-  return axios({ url, method, data, validateStatus: false });
-};
 
 // Drop and re-create database tables
 beforeEach(async () => {
