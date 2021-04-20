@@ -13,7 +13,7 @@ module.exports = {
       response.header('X-Total-Count', count['count(*)']);
 
       return response.json(professores);
-    } catch {
+    } catch (error) {
       next(error);
     }
   },
