@@ -1,16 +1,13 @@
-const connection = require('../database/connection');
+const serviceProfessores = require('../services/professoresService');
 
 module.exports = {
   async list(request, response, next) {
     try {
       const { page = 1 } = request.query;
 
-      const count = await connection('professores').count().first();
+      const count = await serviceProfessores.getCount();
 
-      const professores = await connection('professores')
-        .limit(10)
-        .offset((page - 1) * 5)
-        .select();
+      const professores = await serviceProfessores.list(page);
 
       // Retornando o total de professores cadastrados pelo header da resposta
       response.header('X-Total-Count', count['count(*)']);
@@ -25,10 +22,11 @@ module.exports = {
     try {
       const { id } = request.params;
 
-      const professor = await connection('professores')
-        .where('id', id)
-        .select()
-        .first();
+      const professor = await serviceProfessores.getById(id);
+
+      if (!professor) {
+        return response.status(404).send();
+      }
 
       return response.json(professor);
     } catch (error) {
@@ -40,12 +38,9 @@ module.exports = {
     try {
       const { nome, qualificacao } = request.body;
 
-      await connection('professores').insert({
-        nome,
-        qualificacao,
-      });
+      await serviceProfessores.create(nome, qualificacao);
 
-      return response.status(200);
+      return response.status(200).send();
     } catch (error) {
       next(error);
     }
@@ -56,13 +51,10 @@ module.exports = {
       const { id } = request.params;
       const { nome, qualificacao } = request.body;
 
-      const rows = await connection('professores').where('id', id).update({
-        nome: nome,
-        qualificacao: qualificacao,
-      });
+      const rows = await serviceProfessores.update(id, nome, qualificacao);
 
       if (rows === 0) {
-        return response.status(204).send();
+        return response.status(404).send();
       }
 
       return response.status(200).send();
@@ -76,10 +68,10 @@ module.exports = {
       const { id } = request.params;
 
       // O método delete retorna o número de linhas afetadas, podemos usar isso para verificar se a operação foi bem sucedida
-      const rows = await connection('professores').where('id', id).delete();
+      const rows = await serviceProfessores.delete(id);
 
       if (rows === 0) {
-        return response.status(204).send();
+        return response.status(404).send();
       }
 
       return response.status(200).send();

@@ -1,18 +1,21 @@
-const connection = require('../database/connection');
+const serviceAvaliacoes = require('../services/avaliacoesService');
+const serviceProfessores = require('../services/professoresService');
 
 module.exports = {
   async list(request, response, next) {
     try {
       const { professor_id } = request.params;
 
-      const count = await connection('avaliacoes')
-        .where('professor_id', professor_id)
-        .count()
-        .first();
+      // Verificando se o id é de um professor que existe
+      const professor = await serviceProfessores.getById(professor_id);
 
-      const avaliacoes = await connection('avaliacoes')
-        .where('professor_id', professor_id)
-        .select();
+      if (!professor) {
+        return response.status(404).send();
+      }
+
+      const count = await serviceAvaliacoes.getCount(professor_id);
+
+      const avaliacoes = await serviceAvaliacoes.list(professor_id);
 
       // Retornando o total de avaliacoes do professor cadastrados pelo header da resposta
       response.header('X-Total-Count', count['count(*)']);
@@ -25,51 +28,20 @@ module.exports = {
 
   async create(request, response, next) {
     try {
-      const {
-        curso,
-        ano_ingresso,
-        comentario,
-        avaliacao_conhecimento,
-        avaliacao_didatica,
-        avaliacao_tirar_duvidas,
-        avaliacao_dialogo,
-        avaliacao_metodo_avaliativo,
-        avaliacao_conteudo_cobrado,
-        avaliacao_correcao,
-        avaliacao_materiais,
-        avaliacao_cuidado_ofensivo,
-        cobra_presenca,
-        professor_id,
-      } = request.body;
+      const avaliacao = request.body;
+
+      const { professor_id } = avaliacao;
 
       // Verificando se o id é de um professor que existe
-      const professor = await connection('professores')
-        .where('id', professor_id)
-        .select('id')
-        .first();
+      const professor = await serviceProfessores.getById(professor_id);
 
       if (!professor) {
-        return response.status(204).send();
+        return response.status(404).send();
       }
 
-      await connection('avaliacoes').insert({
-        curso,
-        ano_ingresso,
-        comentario,
-        avaliacao_conhecimento,
-        avaliacao_didatica,
-        avaliacao_tirar_duvidas,
-        avaliacao_dialogo,
-        avaliacao_metodo_avaliativo,
-        avaliacao_conteudo_cobrado,
-        avaliacao_correcao,
-        avaliacao_materiais,
-        avaliacao_cuidado_ofensivo,
-        cobra_presenca,
-        professor_id,
-      });
+      await serviceAvaliacoes.create(avaliacao)
 
-      return response.status(200).send();
+      return response.status(204).send();
     } catch (error) {
       next(error);
     }
@@ -78,43 +50,15 @@ module.exports = {
   async update(request, response, next) {
     try {
       const { id } = request.params;
-      const {
-        curso,
-        ano_ingresso,
-        comentario,
-        avaliacao_conhecimento,
-        avaliacao_didatica,
-        avaliacao_tirar_duvidas,
-        avaliacao_dialogo,
-        avaliacao_metodo_avaliativo,
-        avaliacao_conteudo_cobrado,
-        avaliacao_correcao,
-        avaliacao_materiais,
-        avaliacao_cuidado_ofensivo,
-        cobra_presenca,
-      } = request.body;
+      const avaliacao = request.body;
 
-      const rows = await connection('avaliacoes').where('id', id).update({
-        curso: curso,
-        ano_ingresso: ano_ingresso,
-        comentario: comentario,
-        avaliacao_conhecimento: avaliacao_conhecimento,
-        avaliacao_didatica: avaliacao_didatica,
-        avaliacao_tirar_duvidas: avaliacao_tirar_duvidas,
-        avaliacao_dialogo: avaliacao_dialogo,
-        avaliacao_metodo_avaliativo: avaliacao_metodo_avaliativo,
-        avaliacao_conteudo_cobrado: avaliacao_conteudo_cobrado,
-        avaliacao_correcao: avaliacao_correcao,
-        avaliacao_materiais: avaliacao_materiais,
-        avaliacao_cuidado_ofensivo: avaliacao_cuidado_ofensivo,
-        cobra_presenca: cobra_presenca,
-      });
+      const rows = await serviceAvaliacoes.update(id, avaliacao)
 
       if (rows === 0) {
-        return response.status(204).send();
+        return response.status(404).send();
       }
 
-      return response.status(200).send();
+      return response.status(204).send();
     } catch (error) {
       next(error);
     }
@@ -125,13 +69,13 @@ module.exports = {
       const { id } = request.params;
 
       // O método delete retorna o número de linhas afetadas, podemos usar isso para verificar se a operação foi bem sucedida
-      const rows = await connection('avaliacoes').where('id', id).delete();
+      const rows = await serviceAvaliacoes.delete(id)
 
       if (rows === 0) {
-        return response.status(204).send();
+        return response.status(404).send();
       }
 
-      return response.status(200).send();
+      return response.status(204).send();
     } catch (error) {
       next(error);
     }

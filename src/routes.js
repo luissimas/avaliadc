@@ -5,8 +5,8 @@ const professoresController = require('./controllers/professoresController');
 const avaliacoesController = require('./controllers/avaliacoesController');
 
 // Validação
-const professoresValidator = require('./validation/professoresValidator');
-const avaliacoesValidator = require('./validation/avaliacoesValidator');
+const professoresValidator = require('./middlewares/validation/professoresValidator');
+const avaliacoesValidator = require('./middlewares/validation/avaliacoesValidator');
 
 const routes = express.Router();
 
