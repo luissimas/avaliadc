@@ -1,13 +1,13 @@
-const serviceProfessores = require('../services/professoresService');
+const professoresService = require('../services/professoresService');
 
 module.exports = {
   async list(request, response, next) {
     try {
       const { page = 1 } = request.query;
 
-      const count = await serviceProfessores.getCount();
+      const count = await professoresService.getCount();
 
-      const professores = await serviceProfessores.list(page);
+      const professores = await professoresService.list(page);
 
       // Retornando o total de professores cadastrados pelo header da resposta
       response.header('X-Total-Count', count['count(*)']);
@@ -22,7 +22,7 @@ module.exports = {
     try {
       const { id } = request.params;
 
-      const professor = await serviceProfessores.getById(id);
+      const professor = await professoresService.getById(id);
 
       if (!professor) {
         return response.status(404).send();
@@ -38,7 +38,7 @@ module.exports = {
     try {
       const { nome, qualificacao } = request.body;
 
-      await serviceProfessores.create(nome, qualificacao);
+      await professoresService.create(nome, qualificacao);
 
       return response.status(200).send();
     } catch (error) {
@@ -51,7 +51,7 @@ module.exports = {
       const { id } = request.params;
       const { nome, qualificacao } = request.body;
 
-      const rows = await serviceProfessores.update(id, nome, qualificacao);
+      const rows = await professoresService.update(id, nome, qualificacao);
 
       if (rows === 0) {
         return response.status(404).send();
@@ -68,7 +68,7 @@ module.exports = {
       const { id } = request.params;
 
       // O método delete retorna o número de linhas afetadas, podemos usar isso para verificar se a operação foi bem sucedida
-      const rows = await serviceProfessores.delete(id);
+      const rows = await professoresService.delete(id);
 
       if (rows === 0) {
         return response.status(404).send();
