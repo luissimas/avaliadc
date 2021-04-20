@@ -1,15 +1,18 @@
 const { randomString } = require('../utils/generateRandom');
-const { request } = require('../utils/request')
+const { request } = require('../utils/request');
 const knex = require('../../src/database/connection');
 const professoresService = require('../../src/services/professoresService');
 
 // Drop and re-create database tables
 beforeEach(async () => {
-  await knex.migrate.rollback();
   await knex.migrate.latest();
 });
 
-// Kill database connection
+afterEach(async () => {
+  await knex.migrate.rollback();
+});
+
+//Kill database connection
 afterAll(async () => {
   await knex.destroy();
 });
@@ -51,43 +54,48 @@ test('Should list professor by Id', async () => {
 
   expect(response.status).toBe(200);
 
-  expect(response.data.nome).toBe(professor.nome)
-  expect(response.data.qualificacao).toBe(professor.qualificacao)
+  expect(response.data.nome).toBe(professor.nome);
+  expect(response.data.qualificacao).toBe(professor.qualificacao);
 });
 
 test('Should create professor', async () => {
   const professor = { nome: randomString(), qualificacao: randomString() };
 
   // Inserindo através de uma request
-  const response = await request('/professores', 'post', professor)
+  const response = await request('/professores', 'post', professor);
 
-  expect(response.status).toBe(200);
+  expect(response.status).toBe(204);
 
-  const professoresRegistered = await professoresService.list(1)
+  const professoresRegistered = await professoresService.list(1);
 
-  expect(professoresRegistered).toHaveLength(1)
+  expect(professoresRegistered).toHaveLength(1);
 
-  expect(professoresRegistered[0].nome).toBe(professor.nome)
-  expect(professoresRegistered[0].qualificacao).toBe(professor.qualificacao)
+  expect(professoresRegistered[0].nome).toBe(professor.nome);
+  expect(professoresRegistered[0].qualificacao).toBe(professor.qualificacao);
 });
 
 test('Should update professor', async () => {
   const professor = { nome: randomString(), qualificacao: randomString() };
-  const professorModified = { nome: randomString(), qualificacao: randomString() };
+  const professorModified = {
+    nome: randomString(),
+    qualificacao: randomString(),
+  };
 
   await professoresService.create(professor.nome, professor.qualificacao);
 
   // Modificando através de uma request
-  const response = await request('/professores/1', 'put', professorModified)
+  const response = await request('/professores/1', 'put', professorModified);
 
-  expect(response.status).toBe(200)
+  expect(response.status).toBe(204);
 
-  const professoresRegistered = await professoresService.list(1)
+  const professoresRegistered = await professoresService.list(1);
 
-  expect(professoresRegistered).toHaveLength(1)
+  expect(professoresRegistered).toHaveLength(1);
 
-  expect(professoresRegistered[0].nome).toBe(professorModified.nome)
-  expect(professoresRegistered[0].qualificacao).toBe(professorModified.qualificacao)
+  expect(professoresRegistered[0].nome).toBe(professorModified.nome);
+  expect(professoresRegistered[0].qualificacao).toBe(
+    professorModified.qualificacao
+  );
 });
 
 test('Should delete professor', async () => {
@@ -95,14 +103,14 @@ test('Should delete professor', async () => {
 
   await professoresService.create(professor.nome, professor.qualificacao);
 
-  const [{ id }] = await professoresService.list(1)
+  const [{ id }] = await professoresService.list(1);
 
-  // Modificando através de uma request
-  const response = await request(`/professores/${id}`, 'delete')
+  // Deletando através de uma request
+  const response = await request(`/professores/${id}`, 'delete');
 
-  expect(response.status).toBe(200)
+  expect(response.status).toBe(204);
 
-  const professoresRegistered = await professoresService.list()
+  const professoresRegistered = await professoresService.list();
 
-  expect(professoresRegistered).toHaveLength(0)
+  expect(professoresRegistered).toHaveLength(0);
 });
