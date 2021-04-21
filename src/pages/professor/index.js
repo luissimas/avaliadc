@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
+import StarRatings from "react-star-ratings";
 
 import api from "../../services/api";
 
@@ -27,30 +27,44 @@ export default function Professor() {
     setMediaAvaliacoes(response.data.media);
   }, []);
 
+  // Navegar a página de avaliações
+  function navigateToAvaliar(professor) {
+    history.push({
+      pathname: "/avaliar",
+      state: {
+        professor,
+      },
+    });
+  }
+
   return (
     <div className="professor-container">
-      <header></header>
+      <h1>{professor.nome}</h1>
 
-      <h1>AVALIACOES DO PROFESSOR PA {professor.id}</h1>
+      <header>
+        <p>
+          {professor.avaliacoesCount
+            ? "Avaliações: " + professor.avaliacoesCount
+            : "Esse professor ainda não possui avaliações"}
+        </p>
 
-      <p>
-        {professor.avaliacoesCount
-          ? "Avaliações: " + professor.avaliacoesCount
-          : "Esse professor ainda não possui avaliações"}
-      </p>
+        <p>{professor.avaliacoesCount ? "Média: " + mediaAvaliacoes : " "}</p>
 
-      <p>{professor.avaliacoesCount ? "Média: " + mediaAvaliacoes : " "}</p>
+        <StarRatings
+          rating={parseFloat(mediaAvaliacoes)}
+          starDimension="40px"
+          starSpacing="15px"
+          starRatedColor="#ffb400"
+        />
 
-      <ReactStars
-        size={30}
-        value={mediaAvaliacoes}
-        isHalf={true}
-        edit={false}
-      />
+        <button className="button" onClick={() => navigateToAvaliar(professor)}>
+          Avaliar
+        </button>
+      </header>
 
       <ul>
         {avaliacoes.map((avaliacao) => {
-          if(avaliacao.comentario){
+          if (avaliacao.comentario) {
             return (
               <li key={avaliacao.id}>
                 <p>{avaliacao.curso}</p>
