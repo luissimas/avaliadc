@@ -30,7 +30,7 @@ module.exports = {
         media += avaliacao.avaliacao_cuidado_ofensivo;
       }
 
-      media = (media / (9 * avaliacoes.length));
+      media = (media / (9 * avaliacoes.length)).toFixed(2);
 
       professoresReady.push({
         id: professor.id,
