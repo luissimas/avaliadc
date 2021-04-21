@@ -16,11 +16,12 @@ module.exports = {
       const count = await avaliacoesService.getCount(professor_id);
 
       const avaliacoes = await avaliacoesService.list(professor_id);
+      const media = await avaliacoesService.getMediaAvaliacoes(professor_id);
 
       // Retornando o total de avaliacoes do professor cadastrados pelo header da resposta
       response.header('X-Total-Count', count['count(*)']);
 
-      return response.json(avaliacoes);
+      return response.json({media, avaliacoes});
     } catch (error) {
       next(error);
     }

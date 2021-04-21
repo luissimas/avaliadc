@@ -11,8 +11,31 @@ module.exports = {
   async list(professor_id) {
     return await database('avaliacoes')
       .where('professor_id', professor_id)
-      // .join('professores', 'professores.id', '=', 'avaliacoes.professor_id')
       .select();
+  },
+
+  async getMediaAvaliacoes(professor_id) {
+    const avaliacoes = await database('avaliacoes')
+      .where('professor_id', professor_id)
+      .select();
+
+    let media = 0;
+
+    for (avaliacao of avaliacoes) {
+      media += avaliacao.avaliacao_conhecimento;
+      media += avaliacao.avaliacao_didatica;
+      media += avaliacao.avaliacao_tirar_duvidas;
+      media += avaliacao.avaliacao_dialogo;
+      media += avaliacao.avaliacao_metodo_avaliativo;
+      media += avaliacao.avaliacao_conteudo_cobrado;
+      media += avaliacao.avaliacao_correcao;
+      media += avaliacao.avaliacao_materiais;
+      media += avaliacao.avaliacao_cuidado_ofensivo;
+    }
+
+    media = (media / (9 * avaliacoes.length)).toFixed(2);
+
+    return media;
   },
 
   async create(avaliacao) {
