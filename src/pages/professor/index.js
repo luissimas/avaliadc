@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 
+import HomeLink from "../../components/homelink";
+
 import api from "../../services/api";
 
 import "./style.css";
@@ -43,7 +45,10 @@ export default function Professor() {
 
   return (
     <div className="professor-container">
-      <h1>{professor.nome}</h1>
+      <header>
+        <h1>{professor.nome}</h1>
+        <HomeLink />
+      </header>
 
       <header>
         <p>
@@ -71,8 +76,10 @@ export default function Professor() {
           if (avaliacao.comentario) {
             return (
               <li key={avaliacao.id}>
-                <p>{avaliacao.curso}</p>
-                <p>{avaliacao.comentario}</p>
+                <p className="comment">{avaliacao.comentario}</p>
+                <p className="signature">
+                  - {avaliacao.curso}, {avaliacao.ano_ingresso}
+                </p>
               </li>
             );
           }

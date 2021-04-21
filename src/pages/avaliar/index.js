@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import { Select, MenuItem } from "@material-ui/core";
 
+import HomeLink from "../../components/homelink";
+
 import api from "../../services/api";
 
 import "./style.css";
@@ -76,7 +78,10 @@ export default function Avaliar() {
 
   return (
     <div className="avaliar-container">
-      <header></header>
+      <header>
+        <h1>Avaliar {professor.nome}</h1>
+        <HomeLink />
+      </header>
 
       <form onSubmit={handleAvaliar}>
         <div className="select-container">

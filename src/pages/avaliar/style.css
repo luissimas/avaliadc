@@ -19,6 +19,7 @@
 .avaliar-container form .select-container,
 .avaliar-container form textarea {
   margin-top: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .avaliar-container ul {
@@ -26,7 +27,7 @@
   list-style: none;
   background: #FFF;
   padding: 4px;
-  border: 1px solid #dcdce6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
 
@@ -55,8 +56,14 @@
   display:flex;
   justify-content: space-between;
   background: #FFF;
-  border: 1px solid #dcdce6;
   padding: 24px;
   border-radius: 8px;
   position: relative;
+}
+
+.avaliar-container header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
 }
