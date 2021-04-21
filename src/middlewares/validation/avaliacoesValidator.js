@@ -11,7 +11,7 @@ module.exports = {
     [Segments.BODY]: Joi.object().keys({
       curso: Joi.string().min(2).required(),
       ano_ingresso: Joi.number().integer().min(2000).required(),
-      comentario: Joi.string().min(4).optional(),
+      comentario: Joi.string().allow('').optional(),
       avaliacao_conhecimento: Joi.number().integer().positive().max(5),
       avaliacao_didatica: Joi.number().integer().positive().max(5),
       avaliacao_tirar_duvidas: Joi.number().integer().positive().max(5),
@@ -33,7 +33,7 @@ module.exports = {
     [Segments.BODY]: Joi.object().keys({
       curso: Joi.string().min(2).required(),
       ano_ingresso: Joi.number().integer().min(2000).required(),
-      comentario: Joi.string().min(4).optional(),
+      comentario: Joi.string().allow('').optional(),
       avaliacao_conhecimento: Joi.number().integer().positive().max(5),
       avaliacao_didatica: Joi.number().integer().positive().max(5),
       avaliacao_tirar_duvidas: Joi.number().integer().positive().max(5),
