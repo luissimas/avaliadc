@@ -20,12 +20,16 @@ export default function Professor() {
   const professor = history.location.state.professor;
 
   // Carrega as avaliações do professor ao carregar a página
-  useEffect(async () => {
-    const response = await api.get(`/avaliacoes/${professor.id}`);
+  useEffect(() => {
+    async function getAvaliacoes() {
+      const response = await api.get(`/avaliacoes/${professor.id}`);
 
-    setAvaliacoes(response.data.avaliacoes);
-    setMediaAvaliacoes(response.data.media);
-  }, []);
+      setAvaliacoes(response.data.avaliacoes);
+      setMediaAvaliacoes(response.data.media);
+    }
+
+    getAvaliacoes();
+  }, [professor.id]);
 
   // Navegar a página de avaliações
   function navigateToAvaliar(professor) {
@@ -73,7 +77,7 @@ export default function Professor() {
             );
           }
 
-          return;
+          return " ";
         })}
       </ul>
     </div>

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import StarRatings from "react-star-ratings";
-import { Select, MenuItem, TextField } from "@material-ui/core";
+import { Select, MenuItem } from "@material-ui/core";
 
 import api from "../../services/api";
 
@@ -37,7 +37,7 @@ export default function Avaliar() {
     0
   );
   const [cobra_presenca, setCobra_presenca] = useState(false);
-  const [professor_id, setProfessor_id] = useState(professor.id);
+  const [professor_id] = useState(professor.id);
 
   async function handleAvaliar(event) {
     // Prevent page from reload
@@ -63,7 +63,7 @@ export default function Avaliar() {
     const response = await api.post("/avaliacoes", data);
 
     // Check if response was sucessful
-    if (response.status == 204) {
+    if (response.status === 204) {
       // Return to page of the same professor
       history.push({
         pathname: "/professor",

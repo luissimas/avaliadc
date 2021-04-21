@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import api from "../../services/api";
 
@@ -11,10 +11,13 @@ export default function Home() {
   const history = useHistory();
 
   // useEffect que carrega os dados da api apenas quando o app é carregado pela primeira vez
-  useEffect(async () => {
-    const response = await api.get("/professores");
+  useEffect(() => {
+    async function getProfessores() {
+      const response = await api.get("/professores");
+      setProfessores(response.data);
+    }
 
-    setProfessores(response.data);
+    getProfessores();
   }, []);
 
   // Navegar a página do professor
