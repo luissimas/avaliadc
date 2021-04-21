@@ -33,7 +33,12 @@ module.exports = {
       media += avaliacao.avaliacao_cuidado_ofensivo;
     }
 
-    media = (media / (9 * avaliacoes.length)).toFixed(2);
+    // Check if there are any avaliacoes in the array,
+    // this prevents the return of NaN if there are no
+    // avaliacoes for that professor
+    if (avaliacoes.length > 0){
+      media = (media / (9 * avaliacoes.length)).toFixed(2);
+    }
 
     return media;
   },
