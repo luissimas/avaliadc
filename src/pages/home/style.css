@@ -10,20 +10,19 @@
   margin-bottom: 24px;
 }
 
-.home-container ul {
+.home-container .list-scroll {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 24px;
   list-style: none;
 }
 
-.home-container ul li {
+.home-container li {
   background: #FFF;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 24px;
   height: 300px;
   border-radius: 8px;
-  position: relative;
 }
 
 .home-container ul li strong {
