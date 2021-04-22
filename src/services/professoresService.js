@@ -9,7 +9,7 @@ module.exports = {
   async list(page) {
     const professores = await database('professores')
       .limit(10)
-      .offset((page - 1) * 5)
+      .offset((page - 1) * 10)
       .select();
 
     let professoresReady = [];

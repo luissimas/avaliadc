@@ -11,7 +11,11 @@ const avaliacoesValidator = require('./middlewares/validation/avaliacoesValidato
 const routes = express.Router();
 
 // Professores
-routes.get('/professores', professoresController.list);
+routes.get(
+  '/professores',
+  professoresValidator.list,
+  professoresController.list
+);
 
 routes.get(
   '/professores/:id',
