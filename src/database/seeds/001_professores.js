@@ -3,11 +3,16 @@ exports.seed = function (knex) {
   return knex('professores')
     .del()
     .then(function () {
+      let i;
+      let professoresArray = [];
+
+      for (i = 0; i < 43; i++) {
+        professoresArray.push({
+          nome: `Professor seeded ${i}`,
+          qualificacao: `Qualificacao do professor ${i}`,
+        });
+      }
       // Inserts seed entries
-      return knex('professores').insert([
-        { nome: 'Professor seeded 1', qualificacao: 'Doutorado em seed' },
-        { nome: 'Professor seeded 2', qualificacao: 'Mestrado em seed' },
-        { nome: 'Professor seeded 3', qualificacao: 'Confia no pai' },
-      ]);
+      return knex('professores').insert(professoresArray);
     });
 };
