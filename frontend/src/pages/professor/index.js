@@ -101,7 +101,7 @@ export default function Professor() {
             if (avaliacao.comentario) {
               return (
                 <li key={avaliacao.id}>
-                  <p className="comment">{avaliacao.id} {avaliacao.comentario}</p>
+                  <p className="comment">{avaliacao.comentario}</p>
                   <p className="signature">
                     - {avaliacao.curso}, {avaliacao.ano_ingresso}
                   </p>
