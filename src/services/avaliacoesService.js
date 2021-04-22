@@ -8,9 +8,11 @@ module.exports = {
       .first();
   },
 
-  async list(professor_id) {
+  async list(professor_id, page) {
     return await database('avaliacoes')
       .where('professor_id', professor_id)
+      .limit(10)
+      .offset((page - 1) * 10)
       .select();
   },
 
@@ -36,7 +38,7 @@ module.exports = {
     // Check if there are any avaliacoes in the array,
     // this prevents the return of NaN if there are no
     // avaliacoes for that professor
-    if (avaliacoes.length > 0){
+    if (avaliacoes.length > 0) {
       media = (media / (9 * avaliacoes.length)).toFixed(2);
     }
 
