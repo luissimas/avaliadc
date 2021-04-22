@@ -33,7 +33,7 @@ export default function Home() {
 
     // Incluindo os novos professores carregados pela api
     setProfessores([...professores, ...response.data]);
-    setTotalProfessores(response.headers['x-total-count']);
+    setTotalProfessores(response.headers["x-total-count"]);
     setPage(page + 1);
     setLoading(false);
   }
@@ -62,9 +62,8 @@ export default function Home() {
         <InfiniteScroll
           dataLength={professores.length}
           next={getProfessores}
-          hasMore={professores.length < totalProfessores}
-          loader={<h4>Loading...</h4>}
-    className="list-scroll"
+          hasMore={true}
+          className="list-scroll"
         >
           {professores.map((professor) => {
             return (

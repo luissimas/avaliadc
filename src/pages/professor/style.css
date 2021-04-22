@@ -10,7 +10,7 @@
   margin-bottom: 24px;
 }
 
-.professor-container ul {
+.professor-container .list-scroll {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 24px;
