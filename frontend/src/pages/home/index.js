@@ -9,6 +9,7 @@ import "./style.css";
 export default function Home() {
   const [professores, setProfessores] = useState([]);
   const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
   const [totalProfessores, setTotalProfessores] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -27,9 +28,17 @@ export default function Home() {
 
     setLoading(true);
 
-    const response = await api.get("/professores", {
-      params: { page: page },
-    });
+    let response = {};
+
+    if (searchQuery.length > 0) {
+      response = await api.get(`/professores/${searchQuery}`, {
+        params: { page: page },
+      });
+    } else {
+      response = await api.get("/professores", {
+        params: { page: page },
+      });
+    }
 
     // Incluindo os novos professores carregados pela api
     setProfessores([...professores, ...response.data]);
@@ -38,9 +47,17 @@ export default function Home() {
     setLoading(false);
   }
 
+  function handleSearch(event) {
+    event.preventDefault();
+
+    console.log(event.target.value);
+
+    return setSearchQuery(event.target.value);
+  }
+
   useEffect(() => {
     getProfessores();
-  }, []);
+  }, [searchQuery]);
 
   // Navegar a página do professor
   function navigateToProfessors(professor) {
@@ -57,6 +74,19 @@ export default function Home() {
       <header></header>
 
       <h1>Professores cadastrados</h1>
+
+      <div className="bar-container">
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Nome do profesor"
+            onChange={(event) => setSearchQuery(event.target.value)}
+          />
+          <button className="button" type="submit">
+            Pesquisar
+          </button>
+        </form>
+      </div>
 
       <ul>
         <InfiniteScroll
