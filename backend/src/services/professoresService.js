@@ -2,7 +2,14 @@ const database = require('../database/connection');
 const avaliacoesService = require('../services/avaliacoesService');
 
 module.exports = {
-  async getCount() {
+  async getCount(searchArg) {
+    if (searchArg) {
+      return await database('professores')
+        .where('nome', 'like', `%${searchArg}%`)
+        .count()
+        .first();
+    }
+
     return await database('professores').count().first();
   },
 

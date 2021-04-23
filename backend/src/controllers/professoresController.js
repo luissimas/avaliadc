@@ -35,9 +35,13 @@ module.exports = {
       } else if (typeof searchArg === 'string') {
         result = await professoresService.getByName(searchArg, page);
 
+        const count = await professoresService.getCount(searchArg);
+
         if (result.length === 0) {
           return response.status(404).send();
         }
+
+        response.header('X-Total-Count', count['count(*)']);
       }
 
       return response.json(result);
