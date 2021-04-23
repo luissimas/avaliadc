@@ -18,17 +18,29 @@ module.exports = {
     }
   },
 
-  async listById(request, response, next) {
+  async get(request, response, next) {
     try {
-      const { id } = request.params;
+      const { searchArg } = request.params;
+      const { page = 1 } = request.query;
 
-      const professor = await professoresService.getById(id);
+      let result;
 
-      if (!professor) {
-        return response.status(404).send();
+      // Decide query based on the searchArg type
+      if (typeof searchArg === 'number') {
+        result = await professoresService.getById(searchArg);
+
+        if (!result) {
+          return response.status(404).send();
+        }
+      } else if (typeof searchArg === 'string') {
+        result = await professoresService.getByName(searchArg, page);
+
+        if (result.length === 0) {
+          return response.status(404).send();
+        }
       }
 
-      return response.json(professor);
+      return response.json(result);
     } catch (error) {
       next(error);
     }

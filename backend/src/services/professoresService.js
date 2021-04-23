@@ -15,21 +15,29 @@ module.exports = {
     let professoresReady = [];
 
     for (professor of professores) {
-      const avaliacoes = await avaliacoesService.getCount(professor.id)
+      const avaliacoes = await avaliacoesService.getCount(professor.id);
 
       professoresReady.push({
         id: professor.id,
         nome: professor.nome,
         qualificacao: professor.qualificacao,
-        avaliacoesCount: avaliacoes['count(*)']
-      })
+        avaliacoesCount: avaliacoes['count(*)'],
+      });
     }
 
-    return professoresReady
+    return professoresReady;
   },
 
   async getById(id) {
     return await database('professores').where('id', id).select().first();
+  },
+
+  async getByName(name, page) {
+    return await database('professores')
+      .where('nome', 'like', `%${name}%`)
+      .limit(10)
+      .offset((page - 1) * 10)
+      .select();
   },
 
   async create(nome, qualificacao) {

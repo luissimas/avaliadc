@@ -18,9 +18,9 @@ routes.get(
 );
 
 routes.get(
-  '/professores/:id',
-  professoresValidator.listById,
-  professoresController.listById
+  '/professores/:searchArg',
+  professoresValidator.get,
+  professoresController.get
 );
 
 routes.post(

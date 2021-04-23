@@ -7,9 +7,17 @@ module.exports = {
     }),
   }),
 
-  listById: celebrate({
-    [Segments.PARAMS]: Joi.object().keys({
-      id: Joi.number().integer().positive().required(),
+  get: celebrate({
+    [Segments.PARAMS]: Joi.alternatives([
+      Joi.object().keys({
+        searchArg: Joi.number().integer().positive().required(),
+      }),
+      Joi.object().keys({
+        searchArg: Joi.string().min(1),
+      }),
+    ]),
+    [Segments.QUERY]: Joi.object().keys({
+      page: Joi.number().integer().positive(),
     }),
   }),
 
