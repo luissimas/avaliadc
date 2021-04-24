@@ -18,7 +18,7 @@
 }
 
 .professor-container ul li {
-  background: #fff;
+  background: var(--bg-light);
   padding: 24px;
   min-height: 100px;
   border-radius: 8px;
@@ -30,11 +30,11 @@
 
 .professor-container ul li strong {
   display: block;
-  color: #41414d;
+  color: var(--text-bold);
 }
 
 .professor-container ul li p {
-  color: #737380;
+  color: var(--text);
   line-height: 21px;
   font-size: 16px;
 }

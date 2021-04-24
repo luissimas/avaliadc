@@ -18,7 +18,7 @@
 }
 
 .home-container li {
-  background: #FFF;
+  background: var(--bg-light);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 24px;
   height: 300px;
@@ -28,11 +28,11 @@
 .home-container ul li strong {
   display: block;
   margin-bottom: 16px;
-  color: #41414d;
+  color: var(--text-bold);
 }
 
 .home-container ul li p {
-  color: #737380;
+  color: var(--text);
   line-height: 21px;
   font-size: 16px;
 }
