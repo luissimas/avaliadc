@@ -1,5 +1,5 @@
-const { randomString } = require('../utils/generateRandom');
-const { request } = require('../utils/request');
+const { randomString } = require('../../src/utils/generateRandom');
+const { request } = require('../../src/utils/request');
 const knex = require('../../src/database/connection');
 const professoresService = require('../../src/services/professoresService');
 

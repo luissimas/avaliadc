@@ -1,3 +1,5 @@
+const generate = require('../../utils/generateRandom.js');
+
 exports.seed = function (knex) {
   // Deletes ALL existing entries
   return knex('avaliacoes')
@@ -6,143 +8,36 @@ exports.seed = function (knex) {
       let i;
       let avaliacoesArray = [];
 
-      for (i = 0; i < 20; i++) {
-        avaliacoesArray.push({
-          curso: 'BCC',
-          ano_ingresso: 2020,
-          comentario: 'Acho isso isso e aquilo',
-          avaliacao_conhecimento: 4,
-          avaliacao_didatica: 3,
-          avaliacao_tirar_duvidas: 2,
-          avaliacao_dialogo: 5,
-          avaliacao_metodo_avaliativo: 2,
-          avaliacao_conteudo_cobrado: 4,
-          avaliacao_correcao: 2,
-          avaliacao_materiais: 4,
-          avaliacao_cuidado_ofensivo: 2,
-          cobra_presenca: true,
-          professor_id: 3,
-        });
-      }
+      let cursosArray = ['BCC', 'ENC', 'Outro'];
 
-      for (i = 0; i < 6; i++) {
+      let comentariosArray = [
+        'Acho muito top',
+        'Cara muito bom',
+        'Xingou minha família',
+        'Nunca é demais lembrar o peso e o significado destes problemas, uma vez que o acompanhamento das preferências de consumo assume importantes posições no estabelecimento de alternativas às soluções ortodoxas. Por outro lado, a adoção de políticas descentralizadoras estende o alcance e a importância das novas proposições. Ainda assim, existem dúvidas a respeito de como a determinação clara de objetivos é uma das consequências do remanejamento dos quadros funcionais.',
+        'É claro que o consenso sobre a necessidade de qualificação possibilita uma melhor visão global das condições financeiras e administrativas exigidas. Podemos já vislumbrar o modo pelo qual a percepção das dificuldades ainda não demonstrou convincentemente que vai participar na mudança do orçamento setorial. Desta maneira, o entendimento das metas propostas causa impacto indireto na reavaliação do fluxo de informações. O incentivo ao avanço tecnológico, assim como a constante divulgação das informações oferece uma interessante oportunidade para verificação do investimento em reciclagem técnica.',
+      ];
+
+      for (i = 0; i < 500; i++) {
         avaliacoesArray.push({
-          curso: 'BCC',
-          ano_ingresso: 2020,
-          comentario: 'Acho isso isso e aquilo',
-          avaliacao_conhecimento: 4,
-          avaliacao_didatica: 3,
-          avaliacao_tirar_duvidas: 2,
-          avaliacao_dialogo: 5,
-          avaliacao_metodo_avaliativo: 2,
-          avaliacao_conteudo_cobrado: 4,
-          avaliacao_correcao: 2,
-          avaliacao_materiais: 4,
-          avaliacao_cuidado_ofensivo: 2,
-          cobra_presenca: true,
-          professor_id: 3,
+          curso: cursosArray[generate.randomNumber(0, 2)],
+          ano_ingresso: 2010 + generate.randomNumber(0, 11),
+          comentario: comentariosArray[generate.randomNumber(0, 4)],
+          avaliacao_conhecimento: generate.randomNumber(1, 5),
+          avaliacao_didatica: generate.randomNumber(1, 5),
+          avaliacao_tirar_duvidas: generate.randomNumber(1, 5),
+          avaliacao_dialogo: generate.randomNumber(1, 5),
+          avaliacao_metodo_avaliativo: generate.randomNumber(1, 5),
+          avaliacao_conteudo_cobrado: generate.randomNumber(1, 5),
+          avaliacao_correcao: generate.randomNumber(1, 5),
+          avaliacao_materiais: generate.randomNumber(1, 5),
+          avaliacao_cuidado_ofensivo: generate.randomNumber(1, 5),
+          cobra_presenca: generate.randomBool(),
+          professor_id: generate.randomNumber(1, 43),
         });
       }
 
       // Inserts seed entries
-      return knex('avaliacoes').insert([
-        ...avaliacoesArray,
-        {
-          curso: 'BCC',
-          ano_ingresso: 2020,
-          comentario: 'Acho isso isso e aquilo',
-          avaliacao_conhecimento: 4,
-          avaliacao_didatica: 3,
-          avaliacao_tirar_duvidas: 2,
-          avaliacao_dialogo: 5,
-          avaliacao_metodo_avaliativo: 2,
-          avaliacao_conteudo_cobrado: 4,
-          avaliacao_correcao: 2,
-          avaliacao_materiais: 4,
-          avaliacao_cuidado_ofensivo: 2,
-          cobra_presenca: true,
-          professor_id: 3,
-        },
-        {
-          curso: 'ENC',
-          ano_ingresso: 2018,
-          comentario: 'Acho isso isso e aquilo',
-          avaliacao_conhecimento: 4,
-          avaliacao_didatica: 3,
-          avaliacao_tirar_duvidas: 2,
-          avaliacao_dialogo: 5,
-          avaliacao_metodo_avaliativo: 2,
-          avaliacao_conteudo_cobrado: 4,
-          avaliacao_correcao: 2,
-          avaliacao_materiais: 4,
-          avaliacao_cuidado_ofensivo: 2,
-          cobra_presenca: true,
-          professor_id: 1,
-        },
-        {
-          curso: 'BCC',
-          ano_ingresso: 2021,
-          comentario: 'Acho isso isso e aquilo',
-          avaliacao_conhecimento: 4,
-          avaliacao_didatica: 3,
-          avaliacao_tirar_duvidas: 2,
-          avaliacao_dialogo: 5,
-          avaliacao_metodo_avaliativo: 2,
-          avaliacao_conteudo_cobrado: 4,
-          avaliacao_correcao: 2,
-          avaliacao_materiais: 4,
-          avaliacao_cuidado_ofensivo: 2,
-          cobra_presenca: false,
-          professor_id: 3,
-        },
-        {
-          curso: 'BCC',
-          ano_ingresso: 2021,
-          comentario: 'Acho isso isso e aquilo',
-          avaliacao_conhecimento: 4,
-          avaliacao_didatica: 3,
-          avaliacao_tirar_duvidas: 2,
-          avaliacao_dialogo: 5,
-          avaliacao_metodo_avaliativo: 2,
-          avaliacao_conteudo_cobrado: 4,
-          avaliacao_correcao: 2,
-          avaliacao_materiais: 4,
-          avaliacao_cuidado_ofensivo: 2,
-          cobra_presenca: false,
-          professor_id: 2,
-        },
-        {
-          curso: 'ENC',
-          ano_ingresso: 2020,
-          comentario: 'Acho isso isso e aquilo',
-          avaliacao_conhecimento: 4,
-          avaliacao_didatica: 3,
-          avaliacao_tirar_duvidas: 2,
-          avaliacao_dialogo: 5,
-          avaliacao_metodo_avaliativo: 2,
-          avaliacao_conteudo_cobrado: 4,
-          avaliacao_correcao: 2,
-          avaliacao_materiais: 4,
-          avaliacao_cuidado_ofensivo: 2,
-          cobra_presenca: false,
-          professor_id: 2,
-        },
-        {
-          curso: 'ENC',
-          ano_ingresso: 2019,
-          comentario: 'Acho isso isso e aquilo',
-          avaliacao_conhecimento: 4,
-          avaliacao_didatica: 3,
-          avaliacao_tirar_duvidas: 2,
-          avaliacao_dialogo: 5,
-          avaliacao_metodo_avaliativo: 2,
-          avaliacao_conteudo_cobrado: 4,
-          avaliacao_correcao: 2,
-          avaliacao_materiais: 4,
-          avaliacao_cuidado_ofensivo: 2,
-          cobra_presenca: true,
-          professor_id: 1,
-        },
-      ]);
+      return knex('avaliacoes').insert(avaliacoesArray);
     });
 };
