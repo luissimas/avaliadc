@@ -36,3 +36,14 @@
   line-height: 21px;
   font-size: 16px;
 }
+
+.home-container .bar-container{
+  display:flex;
+  align-items:center;
+}
+
+.home-container .bar-container .button{
+  padding-top: 6px;
+  margin: 0px;
+  width: 60px;
+}
