@@ -5,17 +5,14 @@ import "./style.css";
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState(false);
 
-  function getStyle(style) {
-    window.getComputedStyle(document.body).getPropertyValue(style);
-  }
-
   const initialColors = {
-    bg: getStyle("--bg"),
-    bgLight: getStyle("--bg-light"),
-    border: getStyle("--border"),
-    highligt: getStyle("--highligt"),
-    text: getStyle("--text"),
-    textBold: getStyle("--text-bold"),
+    bg: "#f0f0f5",
+    bgLight: "#FFF",
+    border: "#dcdce6",
+    highligt: "#3470DA",
+    text: "#000",
+    textLight: "#737380",
+    textBold: "#41414d",
   };
 
   const darkColors = {
@@ -23,7 +20,8 @@ export default function ThemeSwitcher() {
     bgLight: "#434758",
     border: "#d0d0d0",
     highligt: "#f07178",
-    text: "#ffffff",
+    text: "#fff",
+    textLight: "#dcdce6",
     textBold: "#d0d0d0",
   };
 
@@ -39,6 +37,8 @@ export default function ThemeSwitcher() {
   }
 
   function handleTheme() {
+    console.log(initialColors)
+
     changeColors(theme ? initialColors : darkColors);
 
     setTheme(!theme);

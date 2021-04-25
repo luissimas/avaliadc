@@ -32,7 +32,7 @@ export default function Home() {
 
     let response;
 
-    try{
+    try {
       if (searchQuery) {
         response = await api.get(`/professores/${searchQuery}`, {
           params: { page: page },
@@ -48,10 +48,10 @@ export default function Home() {
       setTotalProfessores(response.headers["x-total-count"]);
       setPage(page + 1);
       setLoading(false);
-    } catch(error){
+    } catch (error) {
       // Caso haja algum erro na request (provavelmente causado por scroll)
       setLoading(false);
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -103,11 +103,12 @@ export default function Home() {
       >
         <input
           type="text"
-          placeholder="Nome do profesor"
+          className="search-text"
+          placeholder="Nome do professor"
           onChange={(event) => setSearchQuery(event.target.value)}
         />
 
-        <button className="button" type="submit">
+        <button className="search-button" type="submit">
           <BsSearch size={25} />
         </button>
       </form>
@@ -130,7 +131,7 @@ export default function Home() {
                   <p>{professor.qualificacao}</p>
                   <p>
                     {professor.avaliacoesCount
-                      ? professor.avaliacoesCount
+                      ? "Avaliações recebidas: " + professor.avaliacoesCount
                       : "Sem avaliações"}
                   </p>
                 </li>

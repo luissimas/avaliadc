@@ -5,7 +5,8 @@
   --bg-light: #FFF;
   --border: #dcdce6;
   --highligt: #3470DA;
-  --text: #737380;
+  --text: #000;
+  --text-light: #737380;
   --text-bold: #41414d;
 }
 

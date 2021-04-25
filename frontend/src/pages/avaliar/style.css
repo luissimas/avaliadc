@@ -22,6 +22,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.avaliar-container textarea {
+  border: 0px;
+  background: var(--bg-light);
+  color: var(--text);
+}
+
 .avaliar-container ul {
   margin-top: 8px;
   list-style: none;
