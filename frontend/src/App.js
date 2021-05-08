@@ -2,12 +2,14 @@ import React from 'react';
 
 import './global.css';
 
-import Routes from './routes'
+import Routes from './routes';
+import ThemeSwitcher from './components/themeswitcher';
 
 function App() {
   return (
     <div>
-      <Routes/>
+      <ThemeSwitcher />
+      <Routes />
     </div>
   );
 }

@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
-import InfiniteScroll from "react-infinite-scroll-component";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { BsSearch } from 'react-icons/bs';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
-import "./style.css";
+import './style.css';
 
 export default function Home() {
   const [professores, setProfessores] = useState([]);
   const [page, setPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [totalProfessores, setTotalProfessores] = useState(0);
   const [loading, setLoading] = useState(false);
   const [newSearch, setNewSearch] = useState(false);
@@ -38,14 +38,14 @@ export default function Home() {
           params: { page: page },
         });
       } else {
-        response = await api.get("/professores", {
+        response = await api.get('/professores', {
           params: { page: page },
         });
       }
 
       // Incluindo os novos professores carregados pela api
       setProfessores([...professores, ...response.data]);
-      setTotalProfessores(response.headers["x-total-count"]);
+      setTotalProfessores(response.headers['x-total-count']);
       setPage(page + 1);
       setLoading(false);
     } catch (error) {
@@ -81,7 +81,7 @@ export default function Home() {
   // Navegar a página do professor
   function navigateToProfessors(professor) {
     history.push({
-      pathname: "/professor",
+      pathname: '/professor',
       state: {
         professor,
       },
@@ -131,8 +131,8 @@ export default function Home() {
                   <p>{professor.qualificacao}</p>
                   <p>
                     {professor.avaliacoesCount
-                      ? "Avaliações recebidas: " + professor.avaliacoesCount
-                      : "Sem avaliações"}
+                      ? 'Avaliações recebidas: ' + professor.avaliacoesCount
+                      : 'Sem avaliações'}
                   </p>
                 </li>
               </button>
